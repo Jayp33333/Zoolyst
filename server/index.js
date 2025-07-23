@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, '/client/dist')));
 // });
 
 
+
 app.listen(PORT, () => {
   connectDB();
   console.log('Server started at http://localhost:' + PORT);
