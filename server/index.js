@@ -21,9 +21,9 @@ app.use('/api/animals', animalRoutes);
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
 // Catch-all AFTER routes
-// app.get('*', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
-// });
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+});
 
 
 

@@ -4,7 +4,7 @@
   "description": "��#\u0000 \u0000Z\u0000o\u0000o\u0000t\u0000o\u0000p\u0000i\u0000a\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-     "build": "npm install && npm install --prefix client && npm run build --prefix client",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client",
     "start": "node server/index.js",
     "dev": "nodemon server/index.js"
   },
@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/Jayp33333/Zootopia.git"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
