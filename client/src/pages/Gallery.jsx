@@ -5,12 +5,16 @@ import { fetchAnimals, deleteAnimal, updateAnimal } from '../features/animals/an
 import AnimalCard from '../components/AnimalCard';
 import Modal from '../components/Modal';
 import AnimalForm from '../components/AnimalForm';
+import AnimalDetailModal from '../components/AnimalDetailModal';
+import DetailModal from '../components/DetailModal';
 
 const Gallery = () => {
   const dispatch = useDispatch();
   const { data: animalsData, loading, error } = useSelector((state) => state.animals);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentAnimal, setCurrentAnimal] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [selectedAnimal, setSelectedAnimal] = useState(null);
 
   useEffect(() => {
     dispatch(fetchAnimals());
@@ -30,6 +34,11 @@ const Gallery = () => {
   const handleUpdateClick = (animal) => {
     setCurrentAnimal(animal);
     setIsModalOpen(true);
+  };
+
+    const handleCardClick = (animal) => {
+    setSelectedAnimal(animal);
+    setIsDetailModalOpen(true);
   };
 
   const handleUpdateSubmit = async (updatedAnimal) => {
@@ -74,19 +83,33 @@ const Gallery = () => {
               animal={animal} 
               onDelete={handleDelete} 
               onUpdate={() => handleUpdateClick(animal)}
+              onClick={() => handleCardClick(animal)}
             />
           ))}
         </div>
       </div>
 
+      {/* Edit Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2 className="text-xl font-bold mb-4">Edit Animal</h2>
         <AnimalForm 
           initialValues={currentAnimal} 
           onSubmit={handleUpdateSubmit} 
           onCancel={() => setIsModalOpen(false)}
         />
       </Modal>
+
+      {/* Detail View Modal */}
+      <DetailModal isOpen={isDetailModalOpen} onClose={() => setIsDetailModalOpen(false)}>
+        <AnimalDetailModal 
+          animal={selectedAnimal}
+          onClose={() => setIsDetailModalOpen(false)}
+          onEdit={() => {
+            setIsDetailModalOpen(false);
+            setCurrentAnimal(selectedAnimal);
+            setIsModalOpen(true);
+          }}
+        />
+      </DetailModal>
     </>
   );
 };
