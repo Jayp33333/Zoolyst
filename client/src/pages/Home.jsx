@@ -6,8 +6,7 @@ const Home = () => {
     <>
       <HomeHeader />
       <div className="home-container">
-        <h1>Welcome to Zootopia</h1>
-        <p>Your one-stop destination for all things animal-related!</p>
+        <h1>---</h1>
       </div>
     </>
   )
