@@ -41,7 +41,7 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
         
         {/* Description Section */}
         <div>
-          <h4 className="text-md font-medium text-gray-900 dark:text-white mb-2">Description</h4>
+          <h4 className="text-2xl font-medium text-gray-900 dark:text-white mb-2">About {animal.name}</h4>
           <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">
             {animal.description || 'No description available'}
           </p>
