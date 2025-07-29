@@ -111,7 +111,7 @@ const Gallery = () => {
             {animalsData?.data?.length === 0 ? (
               'No animals found in the database'
             ) : (
-              'No animals match your current filters'
+              'No animal found to match your search '
             )}
             <div className="mt-4">
               <button
@@ -121,7 +121,7 @@ const Gallery = () => {
                 }}
                 className="text-blue-600 dark:text-blue-400 hover:underline"
               >
-                Clear all filters
+                Clear Search/Filter
               </button>
             </div>
           </div>
