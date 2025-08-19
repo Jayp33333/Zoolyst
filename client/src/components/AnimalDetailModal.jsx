@@ -50,13 +50,13 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
       
       {/* Fixed Footer */}
       <div className="sticky bottom-0 bg-white dark:bg-gray-700 flex justify-end space-x-2 p-4 border-t dark:border-gray-600">
-        <button
+        {/* <button
           type="button"
           onClick={onEdit}
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Edit
-        </button>
+        </button> */}
         <button
           type="button"
           onClick={onClose}
