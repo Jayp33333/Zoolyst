@@ -25,7 +25,7 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
     <nav className="bg-transparent backdrop-blur-md fixed w-full z-20 top-0 py-1">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
+          <span className="self-center text-blue-700 text-2xl font-semibold whitespace-nowrap dark:text-white">
             Zoolyst
           </span>
         </Link>

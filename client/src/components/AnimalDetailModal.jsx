@@ -5,7 +5,7 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
   if (!animal) return null;
 
   return (
-    <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 max-h-[80vh] flex flex-col">
+    <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 max-h-[100vh] flex flex-col">
       {/* Fixed Header */}
       <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 sticky top-0 bg-white dark:bg-gray-700 z-10">
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
@@ -46,24 +46,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
             {animal.description || 'No description available'}
           </p>
         </div>
-      </div>
-      
-      {/* Fixed Footer */}
-      <div className="sticky bottom-0 bg-white dark:bg-gray-700 flex justify-end space-x-2 p-4 border-t dark:border-gray-600">
-        {/* <button
-          type="button"
-          onClick={onEdit}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Edit
-        </button> */}
-        <button
-          type="button"
-          onClick={onClose}
-          className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
-        >
-          Close
-        </button>
       </div>
     </div>
   );
