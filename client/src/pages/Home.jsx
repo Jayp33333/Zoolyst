@@ -11,10 +11,12 @@ import {
   FiMail, 
   FiPhone, 
   FiMapPin,
+  FiPlay,
+  FiExternalLink
 } from "react-icons/fi";
 import { FaFacebook, FaInstagram, FaGithub } from "react-icons/fa";
 
-// Animation variants (keep the same as before)
+// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -22,7 +24,7 @@ const containerVariants = {
     transition: {
       staggerChildren: 0.2,
       delayChildren: 0.3
-    }
+    },
   }
 };
 
@@ -85,7 +87,7 @@ const AnimatedSection = ({ children, id, className = "" }) => {
   );
 };
 
-const WideBlueLightCursor = () => {
+const WideGreenLightCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -98,9 +100,9 @@ const WideBlueLightCursor = () => {
 
   return (
     <div
-      className="fixed pointer-events-none w-[400px] h-[400px] rounded-full filter blur-[100px] opacity-40"
+      className="fixed pointer-events-none w-[400px] h-[400px] rounded-full filter blur-[100px] opacity-30"
       style={{
-        background: 'radial-gradient(circle, rgba(80, 140, 255, 0.7) 0%, rgba(40, 90, 180, 0) 80%)',
+        background: 'radial-gradient(circle, rgba(46, 125, 50, 0.4) 0%, rgba(46, 125, 50, 0) 80%)',
         transform: `translate(calc(${position.x}px - 200px), calc(${position.y}px - 200px))`,
         transition: 'transform 0.2s ease-out'
       }}
@@ -108,8 +110,181 @@ const WideBlueLightCursor = () => {
   );
 };
 
+// Enhanced sample animal data
+const sampleAnimals = [
+  {
+    id: 1,
+    name: "African Lion",
+    scientificName: "Panthera leo",
+    type: "Mammal",
+    description: "The majestic king of the jungle, known for its impressive mane and powerful roar. Lions are social cats that live in prides and are apex predators in their ecosystem.",
+    habitat: "Savannas, grasslands",
+    diet: "Carnivore",
+    lifespan: "10-14 years in wild",
+    imageUrl: "https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=600&h=400&fit=crop",
+    features: ["Social animals", "Apex predator", "Nocturnal hunter"]
+  },
+  {
+    id: 2,
+    name: "Bald Eagle",
+    scientificName: "Haliaeetus leucocephalus",
+    type: "Bird",
+    description: "America's national bird, symbolizing freedom and strength with its impressive 2.3m wingspan. Known for their incredible eyesight and fishing skills.",
+    habitat: "Near water bodies",
+    diet: "Carnivore",
+    lifespan: "20-30 years",
+    imageUrl: "https://images.unsplash.com/photo-1551085254-e96b210db58a?w=600&h=400&fit=crop",
+    features: ["National symbol", "Excellent vision", "Monogamous"]
+  },
+  {
+    id: 3,
+    name: "Green Sea Turtle",
+    scientificName: "Chelonia mydas",
+    type: "Reptile",
+    description: "Graceful marine reptiles that migrate thousands of miles across oceans. They play a crucial role in maintaining healthy seagrass beds and marine ecosystems.",
+    habitat: "Tropical oceans",
+    diet: "Herbivore",
+    lifespan: "80-100 years",
+    imageUrl: "https://d1jyxxz9imt9yb.cloudfront.net/medialib/4913/image/s768x1300/AdobeStock_381020782_449435_reduced.jpg",
+    features: ["Long migrations", "Herbivorous", "Endangered"]
+  },
+  {
+    id: 4,
+    name: "Red-Eyed Tree Frog",
+    scientificName: "Agalychnis callidryas",
+    type: "Amphibian",
+    description: "Vibrant amphibians with striking red eyes and colorful bodies found in rainforests. They are nocturnal and use their bright colors as a defense mechanism.",
+    habitat: "Rainforests",
+    diet: "Insectivore",
+    lifespan: "5 years",
+    imageUrl: "https://images.unsplash.com/photo-1559253664-ca249d4608c6?w=600&h=400&fit=crop",
+    features: ["Nocturnal", "Colorful defense", "Tree dweller"]
+  }
+];
+
+const AnimalFeatureCard = ({ animal }) => {
+  return (
+    <motion.div 
+      className="group relative bg-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden border border-[#E0E0E0] cursor-pointer"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    >
+      {/* Background Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white via-[#F8FFFE] to-[#F0F8F0] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        {/* Image Section */}
+        <div className="relative h-64 overflow-hidden">
+          <img 
+            src={animal.imageUrl} 
+            alt={animal.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          
+          {/* Type Badge */}
+          <div className="absolute top-4 left-4">
+            <span className="inline-flex items-center px-3 py-1.5 bg-white/95 backdrop-blur-sm text-[#2E7D32] text-sm font-semibold rounded-full border border-[#2E7D32] shadow-lg">
+              <div className="w-2 h-2 bg-[#2E7D32] rounded-full mr-2" />
+              {animal.type}
+            </span>
+          </div>
+
+          {/* Scientific Name */}
+          <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <span className="text-white/90 text-sm font-light bg-black/30 backdrop-blur-sm px-2 py-1 rounded">
+              {animal.scientificName}
+            </span>
+          </div>
+        </div>
+
+        {/* Content Section */}
+        <div className="p-6">
+          {/* Header */}
+          <div className="mb-4">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-[#2E7D32] transition-colors duration-300">
+              {animal.name}
+            </h3>
+            <p className="text-gray-600 leading-relaxed line-clamp-2">
+              {animal.description}
+            </p>
+          </div>
+
+          {/* Features Grid */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#FFF8E1] rounded-lg flex items-center justify-center">
+                <FiMapPin className="w-4 h-4 text-[#2E7D32]" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Habitat</p>
+                <p className="text-sm font-medium text-gray-700 truncate">{animal.habitat}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#FFF8E1] rounded-lg flex items-center justify-center">
+                <FiPlay className="w-4 h-4 text-[#2E7D32]" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Diet</p>
+                <p className="text-sm font-medium text-gray-700">{animal.diet}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#FFF8E1] rounded-lg flex items-center justify-center">
+                <FiCalendar className="w-4 h-4 text-[#2E7D32]" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Lifespan</p>
+                <p className="text-sm font-medium text-gray-700">{animal.lifespan}</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-[#FFF8E1] rounded-lg flex items-center justify-center">
+                <FiZap className="w-4 h-4 text-[#2E7D32]" />
+              </div>
+              <div>
+                <p className="text-xs text-gray-500">Features</p>
+                <p className="text-sm font-medium text-gray-700">{animal.features.length}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Features Tags */}
+          <div className="flex flex-wrap gap-2">
+            {animal.features.map((feature, index) => (
+              <span 
+                key={index}
+                className="inline-flex items-center px-2.5 py-1 bg-[#2E7D32]/10 text-[#2E7D32] text-xs font-medium rounded-full border border-[#2E7D32]/20"
+              >
+                {feature}
+              </span>
+            ))}
+          </div>
+
+          {/* Explore Button */}
+          <div className="mt-4 pt-4 border-t border-[#E0E0E0]">
+            <div className="flex items-center justify-between">
+              <span className="text-sm text-gray-500">Learn more about {animal.name}</span>
+              <div className="flex items-center space-x-1 text-[#2E7D32] group-hover:translate-x-1 transition-transform duration-300">
+                <span className="text-sm font-medium">Explore</span>
+                <FiExternalLink className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Home = () => {
-    const [activeLink, setActiveLink] = useState('home');
+  const [activeLink, setActiveLink] = useState('home');
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
@@ -153,16 +328,17 @@ const Home = () => {
       if (contactRef.current) observer.unobserve(contactRef.current);
     };
   }, []);
+
   return (
     <>
-      <WideBlueLightCursor />
+      <WideGreenLightCursor />
       <HomeHeader activeLink={activeLink} setActiveLink={setActiveLink} />
-      <main className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden">
+      <main className="min-h-screen bg-white overflow-hidden">
         {/* Hero Section */}
         <section id="home" ref={homeRef} className="relative container mx-auto px-6 py-32 md:py-40 text-center">
           {/* Animated decorative elements */}
           <motion.div 
-            className="absolute top-20 left-10 w-20 h-20 bg-blue-100 rounded-full filter blur-xl opacity-70 dark:bg-blue-900 dark:opacity-30"
+            className="absolute top-20 left-10 w-20 h-20 bg-[#FFF8E1] rounded-full filter blur-xl opacity-70"
             animate={{
               y: [0, -15, 0],
               scale: [1, 1.05, 1]
@@ -174,7 +350,7 @@ const Home = () => {
             }}
           />
           <motion.div 
-            className="absolute bottom-1/4 right-10 w-24 h-24 bg-blue-100 rounded-full filter blur-xl opacity-70 dark:bg-blue-900 dark:opacity-30"
+            className="absolute bottom-1/4 right-10 w-24 h-24 bg-[#E0E0E0] rounded-full filter blur-xl opacity-70"
             animate={{
               y: [0, -20, 0],
               scale: [1, 1.1, 1]
@@ -191,8 +367,8 @@ const Home = () => {
           <motion.div variants={containerVariants} className="relative z-10">
             {/* Tagline */}
             <motion.div variants={itemVariants} className="flex items-center justify-center mb-4">
-              <div className="inline-flex items-center bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 rounded-full px-4 py-1.5 text-xs sm:text-sm md:text-md font-medium shadow-sm hover:shadow-md transition-shadow duration-300">
-                <FiZap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-blue-500 dark:text-blue-400" />
+              <div className="inline-flex items-center bg-[#E0E0E0] text-gray-800 rounded-full px-4 py-1.5 text-xs sm:text-sm md:text-md font-medium shadow-sm hover:shadow-md transition-shadow duration-300">
+                <FiZap className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-[#2E7D32]" />
                 Discover the Future of Wildlife
               </div>
             </motion.div>
@@ -200,14 +376,12 @@ const Home = () => {
             {/* Main Heading */}
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 dark:text-white mb-6 leading-tight"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-[#2E7D32] mb-6 leading-tight"
             >
               Where Nature Meets
               <br className="hidden md:block" />
               <motion.span 
-                className="relative inline-block mt-2 md:mt-0"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                className="relative inline-block mt-2 md:mt-0 text-[#2E7D32]"
               >
                 Digital Innovation
               </motion.span>
@@ -216,7 +390,7 @@ const Home = () => {
             {/* Subheading */}
             <motion.h3 
               variants={itemVariants}
-              className="text-sm sm:text-md md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10"
+              className="text-sm sm:text-md md:text-xl text-gray-600 max-w-3xl mx-auto mb-10"
             >
               Immerse yourself in a curated collection of amazing animals, brought
               to life <br className="hidden md:block" />
@@ -226,11 +400,11 @@ const Home = () => {
             {/* CTA Buttons */}
             <motion.div 
               variants={itemVariants}
-              className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6"
+              className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 mb-20"
             >
               <Link
                 to="/gallery"
-                className="flex items-center justify-center px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
+                className="flex items-center justify-center px-8 py-3 md:px-10 md:py-4 bg-[#2E7D32] text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group hover:bg-[#1B5E20]"
               >
                 <motion.span 
                   className="mr-2"
@@ -253,10 +427,10 @@ const Home = () => {
 
               <motion.a
                 href="#about"
-                className="px-8 py-3 md:px-10 md:py-4 border-2 border-blue-500 text-blue-600 dark:text-blue-400 font-medium rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors duration-300"
+                className="px-8 py-3 md:px-10 md:py-4 border-2 border-[#2E7D32] text-[#2E7D32] font-medium rounded-lg hover:bg-[#2E7D32] hover:text-white transition-colors duration-300"
                 whileHover={{ 
                   y: -2,
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)"
+                  boxShadow: "0 4px 8px rgba(46, 125, 50, 0.2)"
                 }}
               >
                 Learn More
@@ -265,10 +439,66 @@ const Home = () => {
           </motion.div>
         </section>
 
+        {/* Featured Animals Section */}
+        <section id="featured" className="relative bg-gradient-to-b from-white to-[#F8FFFE] py-20 md:py-32">
+          <div className="container mx-auto px-6">
+            <motion.div 
+              variants={fadeIn}
+              className="text-center mb-16"
+            >
+              <motion.h2 
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4"
+                whileInView={{ y: [20, 0], opacity: [0, 1] }}
+                transition={{ duration: 0.6 }}
+              >
+                Featured <span className="text-[#2E7D32]">Wildlife</span>
+              </motion.h2>
+              <motion.p 
+                className="text-lg text-gray-600 max-w-2xl mx-auto"
+                whileInView={{ y: [10, 0], opacity: [0, 1] }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Explore our curated collection of fascinating animals from around the world
+              </motion.p>
+            </motion.div>
+            
+            {/* Big Animal Cards Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+              {sampleAnimals.map((animal, index) => (
+                <motion.div
+                  key={animal.id}
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <AnimalFeatureCard animal={animal} />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* View All Button */}
+            <motion.div 
+              className="mt-12 text-center"
+              whileInView={{ opacity: [0, 1] }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              <Link
+                to="/gallery"
+                className="inline-flex items-center px-8 py-3 bg-white text-[#2E7D32] font-medium rounded-lg shadow-lg hover:shadow-xl border-2 border-[#2E7D32] hover:bg-[#2E7D32] hover:text-white transition-all duration-300"
+              >
+                View All Animals
+                <FiArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
         {/* About Section */}
-        <section id="about" ref={aboutRef} className="relative overflow-hidden">
+        <AnimatedSection id="about" ref={aboutRef} className="relative overflow-hidden bg-white">
           <motion.div 
-            className="absolute -bottom-20 -right-20 w-80 h-80 bg-green-100 rounded-full filter blur-3xl opacity-30 dark:bg-green-900 dark:opacity-20"
+            className="absolute -bottom-20 -right-20 w-80 h-80 bg-[#2E7D32] rounded-full filter blur-3xl opacity-10"
             animate={{
               rotate: [0, 5, 0],
               scale: [1, 1.02, 1]
@@ -288,17 +518,17 @@ const Home = () => {
                 className="text-center mb-16"
               >
                 <motion.h2 
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 dark:text-white mb-4"
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4"
                   whileInView={{ y: [20, 0], opacity: [0, 1] }}
                   transition={{ duration: 0.6 }}
                 >
                   About{" "}
-                  <span className="text-blue-600 dark:text-blue-400">
+                  <span className="text-[#2E7D32]">
                     Zoolyst
                   </span>
                 </motion.h2>
                 <motion.div 
-                  className="w-20 h-1 bg-gradient-to-r from-blue-400 to-purple-600 mx-auto rounded-full"
+                  className="w-20 h-1 bg-[#2E7D32] mx-auto rounded-full"
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
@@ -321,7 +551,7 @@ const Home = () => {
                     <motion.p 
                       key={index}
                       variants={slideUp}
-                      className="text-md md:text-lg text-gray-600 dark:text-gray-300"
+                      className="text-md md:text-lg text-gray-700"
                     >
                       {text}
                     </motion.p>
@@ -333,7 +563,7 @@ const Home = () => {
                   >
                     <Link
                       to="/gallery"
-                      className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
+                      className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-[#2E7D32] hover:bg-[#1B5E20] transition-colors duration-300"
                     >
                       Start Exploring
                     </Link>
@@ -347,17 +577,17 @@ const Home = () => {
                 >
                   {[
                     {
-                      icon: <FiZap className="w-8 h-8 text-blue-500" />,
+                      icon: <FiZap className="w-8 h-8 text-[#2E7D32]" />,
                       title: "Fast Access",
                       description: "Instant loading of high-quality animal profiles with detailed information.",
                     },
                     {
-                      icon: <FiShield className="w-8 h-8 text-green-500" />,
+                      icon: <FiShield className="w-8 h-8 text-[#2E7D32]" />,
                       title: "Verified Data",
                       description: "All information is carefully researched and verified by wildlife experts.",
                     },
                     {
-                      icon: <FiCalendar className="w-8 h-8 text-purple-500" />,
+                      icon: <FiCalendar className="w-8 h-8 text-[#2E7D32]" />,
                       title: "Regular Updates",
                       description: "New species and features added monthly to keep content fresh.",
                     },
@@ -365,7 +595,7 @@ const Home = () => {
                     <motion.div
                       key={index}
                       variants={itemVariants}
-                      className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-blue-500"
+                      className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border-l-4 border-[#2E7D32]"
                       whileHover={{ 
                         y: -5,
                         boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)"
@@ -379,10 +609,10 @@ const Home = () => {
                           {card.icon}
                         </motion.div>
                         <div>
-                          <h3 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+                          <h3 className="text-xl font-semibold text-gray-800 mb-2">
                             {card.title}
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-300">
+                          <p className="text-gray-600">
                             {card.description}
                           </p>
                         </div>
@@ -406,16 +636,16 @@ const Home = () => {
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center"
+                    className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 text-center border border-[#E0E0E0]"
                     whileHover={{ scale: 1.05 }}
                   >
                     <motion.p 
-                      className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2"
+                      className="text-3xl font-bold text-[#2E7D32] mb-2"
                       whileHover={{ scale: 1.1 }}
                     >
                       {item.number}
                     </motion.p>
-                    <p className="text-gray-600 dark:text-gray-300">
+                    <p className="text-gray-600">
                       {item.label}
                     </p>
                   </motion.div>
@@ -423,24 +653,24 @@ const Home = () => {
               </motion.div>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Contact Section */}
-        <section id="contact" ref={contactRef} className="bg-white dark:bg-gray-800 py-16 md:py-32">
+        <AnimatedSection id="contact" ref={contactRef} className="bg-white py-16 md:py-32">
           <div className="container mx-auto px-4 sm:px-6">
             <motion.div 
               variants={fadeIn}
               className="max-w-4xl mx-auto text-center mb-12 md:mb-16"
             >
               <motion.h2 
-                className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-3 md:mb-4"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-3 md:mb-4"
                 whileInView={{ y: [20, 0], opacity: [0, 1] }}
                 transition={{ duration: 0.6 }}
               >
                 Get In Touch
               </motion.h2>
               <motion.p 
-                className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+                className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto"
                 whileInView={{ y: [10, 0], opacity: [0, 1] }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
@@ -459,7 +689,7 @@ const Home = () => {
               >
                 {[
                   {
-                    icon: <FiMail className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />,
+                    icon: <FiMail className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E7D32]" />,
                     title: "Email Us",
                     details: [
                       "info@zoolyst.com",
@@ -467,7 +697,7 @@ const Home = () => {
                     ]
                   },
                   {
-                    icon: <FiPhone className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />,
+                    icon: <FiPhone className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E7D32]" />,
                     title: "Call Us",
                     details: [
                       "+63-970-6553264",
@@ -475,7 +705,7 @@ const Home = () => {
                     ]
                   },
                   {
-                    icon: <FiMapPin className="w-5 h-5 sm:w-6 sm:h-6 text-blue-500" />,
+                    icon: <FiMapPin className="w-5 h-5 sm:w-6 sm:h-6 text-[#2E7D32]" />,
                     title: "Visit Us",
                     details: [
                       "Purok 4, Brgy Biyan",
@@ -492,11 +722,11 @@ const Home = () => {
                       {item.icon}
                     </div>
                     <div>
-                      <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white mb-1 sm:mb-2">
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mb-1 sm:mb-2">
                         {item.title}
                       </h3>
                       {item.details.map((detail, i) => (
-                        <p key={i} className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                        <p key={i} className="text-xs sm:text-sm text-gray-600">
                           {detail}
                         </p>
                       ))}
@@ -513,7 +743,7 @@ const Home = () => {
                     href="https://www.facebook.com/johnpaul.jamito.585" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
+                    className="text-gray-500 hover:text-[#2E7D32] transition-colors duration-300"
                     aria-label="Facebook"
                   >
                     <FaFacebook className="w-6 h-6" />
@@ -522,7 +752,7 @@ const Home = () => {
                     href="https://www.instagram.com/jay_p33333/" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-pink-600 dark:hover:text-pink-400 transition-colors duration-300"
+                    className="text-gray-500 hover:text-[#2E7D32] transition-colors duration-300"
                     aria-label="Instagram"
                   >
                     <FaInstagram className="w-6 h-6" />
@@ -531,7 +761,7 @@ const Home = () => {
                     href="https://github.com/Jayp33333" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-gray-800 dark:hover:text-gray-300 transition-colors duration-300"
+                    className="text-gray-500 hover:text-gray-800 transition-colors duration-300"
                     aria-label="GitHub"
                   >
                     <FaGithub className="w-6 h-6" />
@@ -542,14 +772,14 @@ const Home = () => {
               {/* Contact Form */}
               <motion.div 
                 variants={scaleUp}
-                className="bg-white dark:bg-gray-700 p-4 sm:p-6 rounded-xl shadow-md"
+                className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-[#E0E0E0]"
                 whileHover={{ 
                   y: -5,
                   boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)"
                 }}
               >
                 <motion.h3 
-                  className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-white mb-4 sm:mb-6"
+                  className="text-lg sm:text-xl font-semibold text-gray-800 mb-4 sm:mb-6"
                   whileInView={{ opacity: [0, 1], y: [10, 0] }}
                   transition={{ duration: 0.5 }}
                 >
@@ -571,7 +801,7 @@ const Home = () => {
                     >
                       <label
                         htmlFor={field.id}
-                        className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                        className="block text-xs sm:text-sm font-medium text-gray-700 mb-1"
                       >
                         {field.label}
                       </label>
@@ -579,14 +809,14 @@ const Home = () => {
                         <textarea
                           id={field.id}
                           rows="3"
-                          className="w-full px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm border border-[#E0E0E0] rounded-md focus:ring-[#2E7D32] focus:border-[#2E7D32] bg-white text-gray-800"
                           placeholder={field.placeholder}
                         ></textarea>
                       ) : (
                         <input
                           type={field.type}
                           id={field.id}
-                          className="w-full px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
+                          className="w-full px-3 py-2 sm:px-4 sm:py-2 text-xs sm:text-sm border border-[#E0E0E0] rounded-md focus:ring-[#2E7D32] focus:border-[#2E7D32] bg-white text-gray-800"
                           placeholder={field.placeholder}
                         />
                       )}
@@ -594,7 +824,7 @@ const Home = () => {
                   ))}
                   <motion.button
                     type="submit"
-                    className="w-full text-xs sm:text-sm bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors duration-300"
+                    className="w-full text-xs sm:text-sm bg-[#2E7D32] hover:bg-[#1B5E20] text-white font-medium py-2 px-4 rounded-md transition-colors duration-300"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -604,10 +834,10 @@ const Home = () => {
               </motion.div>
             </motion.div>
           </div>
-        </section>
+        </AnimatedSection>
       </main>
     </>
   );
 };
 
-export default Home;  
+export default Home;

@@ -83,13 +83,13 @@ const Gallery = () => {
     }
   };
 
-  if (loading) return <GallerySkeleton />;
+  if (loading) return <GallerySkeleton />; 
   
 
-  if (error) return <div className="container mx-auto pt-20 text-center text-red-500">Error: {error}</div>;
+  if (error) return <div className="container mx-auto pt-20 text-center text-black">Error: {error}</div>;
 
   return (
-    <>
+    <div className="min-h-screen bg-white">
       <GalleryHeader 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -97,9 +97,9 @@ const Gallery = () => {
         setSelectedCategories={setSelectedCategories}
       />
       
-      <div className="container mx-auto py-8 px-4">
+      <div className="container mx-auto py-8 px-4 bg-white">
         {filteredAnimals.length === 0 ? (
-          <div className="text-center text-gray-500 dark:text-gray-400 py-12">
+          <div className="text-center text-black py-12">
             {animalsData?.data?.length === 0 ? (
               'No animals found in the database'
             ) : (
@@ -111,14 +111,14 @@ const Gallery = () => {
                   setSearchQuery('');
                   setSelectedCategories([]);
                 }}
-                className="text-blue-600 dark:text-blue-400 hover:underline"
+                className="text-black hover:underline font-medium border border-black px-4 py-2 rounded-lg hover:bg-gray-100"
               >
                 Clear Search/Filter
               </button>
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {filteredAnimals.map((animal) => (
               <AnimalCard 
                 key={animal._id} 
@@ -153,7 +153,7 @@ const Gallery = () => {
           }}
         />
       </DetailModal>
-    </>
+    </div>
   );
 };
 

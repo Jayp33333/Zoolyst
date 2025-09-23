@@ -1,6 +1,7 @@
 import Animal from "../models/Animal.model.js";
 import mongoose from "mongoose";
 
+// Get all animals
 export const getAllAnimals = async (req, res) => {
   try {
     const animals = await Animal.find({});
@@ -9,42 +10,55 @@ export const getAllAnimals = async (req, res) => {
     console.log("Error fetching animals:", error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
-}
+};
 
+// Create a new animal
 export const createAnimal = async (req, res) => {
   const animal = req.body;
-  if (!animal.name || !animal.type || !animal.description || !animal.image) {
-    return res.status(400).json({ success: false, message: "All fields are required" });
+
+  // Validate required fields
+  if (!animal.name || !animal.type || !animal.description || !animal.imageUrls || !animal.imageUrls.length) {
+    return res.status(400).json({ success: false, message: "Name, type, description, and at least one image URL are required" });
   }
-  if (!['Mammal', 'Bird', 'Reptile', 'Fish', 'Amphibian'].includes(animal.type)) {
+
+  // Validate type
+  const validTypes = ['mammal', 'bird', 'reptile', 'fish', 'amphibian'];
+  if (!validTypes.includes(animal.type.toLowerCase())) {
     return res.status(400).json({ success: false, message: "Invalid animal type" });
   }
+
   try {
+    // Ensure type is stored in lowercase
+    animal.type = animal.type.toLowerCase();
+
     const newAnimal = new Animal(animal);
     await newAnimal.save();
-  res.status(201).json({ success: true, data: newAnimal });
+
+    res.status(201).json({ success: true, data: newAnimal });
   } catch (error) {
     console.error("Error creating animal:", error.message);
     res.status(500).json({ success: false, message: "Server Error" });
   }
-}
+};
 
+// Update animal
 export const updateAnimal = async (req, res) => {
   const { id } = req.params;
-  const product = req.body;
+  const animalData = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ success: false, message: "Invalid ID" });
   }
 
   try {
-    const updateAnimal = await Animal.findByIdAndUpdate(id, product, { new: true });
-    res.status(200).json({ success: true, data: updateAnimal });
+    const updatedAnimal = await Animal.findByIdAndUpdate(id, animalData, { new: true });
+    res.status(200).json({ success: true, data: updatedAnimal });
   } catch (error) {
     res.status(500).json({ success: false, message: "Server Error" });
   }
-}
+};
 
+// Delete animal
 export const deleteAnimal = async (req, res) => {
   const { id } = req.params;
 
@@ -59,4 +73,4 @@ export const deleteAnimal = async (req, res) => {
     console.log("Error deleting animal:", error.message);
     res.status(500).json({ success: false, message: "Server Error" });
   }
-}
+};

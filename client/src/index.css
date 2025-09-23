@@ -1,23 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Baloo+2:wght@700&family=Fredoka+One&family=Bungee&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: #2631256c #0b0c00;
+    scrollbar-color: #e0e0ec #b2aeae;
   }
-  
+
   :root {
-    --bg-color: #171717;
-    --text-color: #e0e0e0;
+    --bg-color: #ffffff;
+    --text-color: #171717;
     --card-bg: #0c120c;
     --header-bg: #1a3a1a;
-    --accent-color: #4CAF50;
+    --accent-color: #4caf50;
     --border-color: #333;
     --modal-bg: #252525;
     --button-bg: #2e7d32;
@@ -25,69 +22,82 @@
     --error-color: #ff6b6b;
   }
 
-  body, html {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-                  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      scroll-behavior: smooth;
+  body,
+  html {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    scroll-behavior: smooth;
   }
+  a, p{
+    font-family: Arial, sans-serif;
+  }
+  
 }
 
 @layer components {
-         @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-20px); }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes fadeInUp {
-          from { 
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to { 
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-float-delay {
-          animation: float 6s ease-in-out 1s infinite;
-        }
-        .animate-fade-in {
-          animation: fadeIn 1s ease-out forwards;
-        }
-        .animate-fade-in-up {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .delay-100 {
-          animation-delay: 100ms;
-        }
-        .delay-200 {
-          animation-delay: 200ms;
-        }
-        /* Add this to your global CSS file or style component */
-.transition-all {
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 300ms;
-}
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  .animate-float-delay {
+    animation: float 6s ease-in-out 1s infinite;
+  }
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-200 {
+    animation-delay: 200ms;
+  }
+  /* Add this to your global CSS file or style component */
+  .transition-all {
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
 
-/* Ensure the effect appears above content */
-.fixed {
-  position: fixed;
-  z-index: 9999;
-}
+  /* Ensure the effect appears above content */
+  .fixed {
+    position: fixed;
+    z-index: 9999;
+  }
 
-/* Optional: dim effect on dark backgrounds */
-.dark .mix-blend-screen {
-  opacity: 0.5;
-}
+  /* Optional: dim effect on dark backgrounds */
+  .dark .mix-blend-screen {
+    opacity: 0.5;
+  }
 }
