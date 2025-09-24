@@ -41,7 +41,7 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-3">
               <h3 className="text-2xl font-bold text-black">{animal.name}</h3>
-              <GetBadge type={animal.type} />
+              {/* <GetBadge type={animal.type} /> */}
             </div>
           </div>
           <div className="flex items-center space-x-3">

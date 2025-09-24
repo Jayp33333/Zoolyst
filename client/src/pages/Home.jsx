@@ -509,7 +509,7 @@ const Home = () => {
                 <Link
                   to="/gallery"
                   className="relative flex items-center justify-center px-8 py-3 md:px-10 md:py-4 
-             bg-gradient-to-b from-[#2e4e30] via-[#233e23] to-[#192d18] 
+             bg-gradient-to-b from-[#0D5B10] via-[#187C19] to-[#69B31E] 
              text-white font-medium rounded-lg shadow-xl 
              hover:shadow-2xl transition-all duration-300 group 
              overflow-hidden"

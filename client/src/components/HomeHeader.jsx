@@ -58,7 +58,7 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <motion.span
             className={`self-center text-2xl font-semibold whitespace-nowrap transition-colors duration-300 ${
-              scrolled ? "bg-gradient-to-b from-[#46b12f]   via-[#174017] to-[#3e8445] bg-clip-text text-transparent" : "bg-gradient-to-b from-[#46b12f]   via-[#174017] to-[#3e8445] bg-clip-text text-transparent"
+              scrolled ? " bg-gradient-to-b from-[#0D5B10] via-[#187C19] to-[#69B31E]  bg-clip-text text-transparent" : " bg-gradient-to-b from-[#0D5B10] via-[#187C19] to-[#69B31E]  bg-clip-text text-transparent"
             } hover:text-[#1B5E20]`}
           >
             Zoolyst

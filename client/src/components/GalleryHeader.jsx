@@ -60,7 +60,7 @@ const GalleryHeader = ({
     <nav className="bg-white border-b border-[#E0E0E0]">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap bg-gradient-to-b from-[#46b12f]   via-[#174017] to-[#3e8445] bg-clip-text text-transparent  hover:text-[#1B5E20] transition-colors duration-300">
+          <span className="self-center text-2xl font-semibold whitespace-nowrap  bg-gradient-to-b from-[#0D5B10] via-[#187C19] to-[#69B31E]  bg-clip-text text-transparent  hover:text-[#1B5E20] transition-colors duration-300">
             Zoolyst
           </span>
         </Link>
