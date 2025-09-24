@@ -256,7 +256,7 @@ const GalleryHeader = ({
                       <input
                         id={`filter-${category}`}
                         type="checkbox"
-                        className="w-4 h-4 text-[#2E7D32] bg-white border-[#E0E0E0] rounded focus:ring-[#2E7D32] focus:ring-2"
+                        className="w-4 h-4 bg-white border-[#E0E0E0] roundedfocus:ring-2"
                         checked={selectedCategories.includes(category)}
                         onChange={() => handleCategoryChange(category)}
                       />
