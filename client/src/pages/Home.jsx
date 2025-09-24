@@ -266,9 +266,8 @@ const AnimalFeatureCard = ({ animal }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
           {/* Type Badge */}
-          <div className="absolute top-4 left-4">
+          <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <span className="inline-flex items-center px-3 py-1.5 bg-white/95 backdrop-blur-sm text-[#2E7D32] text-sm font-semibold rounded-full border border-[#2E7D32] shadow-lg">
-              <div className="w-2 h-2 bg-[#2E7D32] rounded-full mr-2" />
               {animal.type}
             </span>
           </div>
@@ -363,7 +362,9 @@ const AnimalFeatureCard = ({ animal }) => {
                 Learn more about {animal.name}
               </span>
               <div className="flex items-center space-x-1 text-[#2E7D32] group-hover:translate-x-1 transition-transform duration-300">
-                <span className="text-sm font-medium">Explore</span>
+                <Link
+                 to="/gallery"
+                 className="text-sm font-medium">Explore</Link>
                 <FiExternalLink className="w-4 h-4" />
               </div>
             </div>
@@ -482,7 +483,7 @@ const Home = () => {
               {/* Main Heading */}
               <motion.h1
                 variants={itemVariants}
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-2xl "
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-2xl "
               >
                 Where Nature Meets
                 <br className="hidden md:block" />
