@@ -34,96 +34,105 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="relative bg-white rounded-2xl shadow-2xl max-h-[95vh] w-full max-w-4xl flex flex-col">
+      <div className="relative bg-white rounded-2xl shadow-2xl max-h-[95vh] w-full max-w-4xl flex flex-col overflow-hidden">
+              {/* Content */}
+        <div className="overflow-y-auto flex-1 space-y-6">
         
-        {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#E0E0E0] sticky top-0 bg-white rounded-t-2xl z-20">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3">
-              <h3 className="text-2xl font-bold text-black">{animal.name}</h3>
-              {/* <GetBadge type={animal.type} /> */}
-            </div>
+        {/* Header Overlay - Inside Image */}
+        <div className="relative w-full aspect-video bg-[#E0E0E0]">
+          {/* Loading State */}
+          <div className={`absolute inset-0 flex items-center justify-center ${imageLoaded ? 'hidden' : 'block'}`}>
+            <div className="animate-pulse bg-gray-300 w-full h-full"></div>
           </div>
-          <div className="flex items-center space-x-3">
-            {/* <button
-              onClick={onEdit}
-              className="flex items-center space-x-2 px-4 py-2 bg-[#0288D1] hover:bg-[#0277BD] text-white rounded-lg transition-all duration-200 font-medium"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-              </svg>
-              <span>Edit</span>
-            </button> */}
-            <button
-              onClick={onClose}
-              className="p-2 hover:bg-[#E0E0E0] rounded-full transition-all duration-200"
-            >
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-        </div>
+          
+          {/* Main Image */}
+          <img 
+            src={images[currentImageIndex]} 
+            alt={animal.name} 
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imageLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+            onLoad={handleImageLoad}
+          />
+          
+          {/* Overlay Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20" />
+          
+          {/* Close Button - Top Right */}
+          <button
+            onClick={onClose}
+            className="absolute top-6 right-6 z-10 bg-white/20 hover:bg-white/90 backdrop-blur-sm text-black rounded-full p-3 hover:scale-110 transition-all duration-200 shadow-lg group"
+          >
+            <svg className="w-6 h-6 group-hover:rotate-90 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
 
-        {/* Content */}
-        <div className="overflow-y-auto flex-1 p-6 space-y-6">
-          {/* Image Carousel */}
-          <div className="relative w-full aspect-video rounded-xl overflow-hidden bg-[#E0E0E0] shadow-lg">
-            <div className={`absolute inset-0 flex items-center justify-center ${imageLoaded ? 'hidden' : 'block'}`}>
-              <div className="animate-pulse bg-gray-300 w-full h-full"></div>
-            </div>
-            <img 
-              src={images[currentImageIndex]} 
-              alt={animal.name} 
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-300 ${
-                imageLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
-              onLoad={handleImageLoad}
-            />
-            
-            {/* Image Navigation */}
-            {images.length > 1 && (
-              <>
-                <button
-                  onClick={handlePrevImage}
-                  className="absolute top-1/2 left-4 -translate-y-1/2 bg-white/20 hover:bg-white/90 text-black rounded-full p-3 hover:scale-110 transition-all duration-200 shadow-lg"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <button
-                  onClick={handleNextImage}
-                  className="absolute top-1/2 right-4 -translate-y-1/2 bg-white/20 hover:bg-white/90 text-black rounded-full p-3 hover:scale-110 transition-all duration-200 shadow-lg"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-                
-                {/* Image Indicators */}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        setImageLoaded(false);
-                        setCurrentImageIndex(index);
-                      }}
-                      className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                        index === currentImageIndex 
-                          ? 'bg-[#535353] scale-125' 
-                          : 'bg-white/50 hover:bg-white/80'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </>
+          {/* Animal Name - Top Left */}
+          <div className="absolute top-6 left-6 z-10">
+            <h2 className="text-4xl font-bold text-white drop-shadow-2xl bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+              {animal.name}
+            </h2>
+            {animal.scientificName && (
+              <p className="text-white/90 text-lg font-light mt-1 drop-shadow-lg">
+                {animal.scientificName}
+              </p>
             )}
           </div>
 
+          {/* Image Navigation */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrevImage}
+                className="absolute top-1/2 left-6 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/90 backdrop-blur-sm text-black rounded-full p-3 hover:scale-110 transition-all duration-200 shadow-lg"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={handleNextImage}
+                className="absolute top-1/2 right-6 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/90 backdrop-blur-sm text-black rounded-full p-3 hover:scale-110 transition-all duration-200 shadow-lg"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+              
+              {/* Image Indicators */}
+              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex space-x-3">
+                {images.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setImageLoaded(false);
+                      setCurrentImageIndex(index);
+                    }}
+                    className={`w-3 h-3 rounded-full transition-all duration-200 backdrop-blur-sm ${
+                      index === currentImageIndex 
+                        ? 'bg-white scale-125 shadow-lg' 
+                        : 'bg-white/50 hover:bg-white/80'
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
+
+          {/* Image Counter */}
+          {images.length > 1 && (
+            <div className="absolute bottom-6 right-6 z-10 bg-black/40 backdrop-blur-sm rounded-full px-3 py-1">
+              <span className="text-white text-sm font-medium">
+                {currentImageIndex + 1} / {images.length}
+              </span>
+            </div>
+          )}
+        </div>
+
+
           {/* Main Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-6 pb-6">
             {/* Left Column - Basic Info */}
             <div className="lg:col-span-2 space-y-6">
               {/* Description */}
