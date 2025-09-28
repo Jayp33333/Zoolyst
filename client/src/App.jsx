@@ -4,10 +4,15 @@ import Gallery from './pages/Gallery'
 import CreateAnimal from './features/animals/CreateAnimal'
 import UpdateAnimal from './features/animals/UpdateAnimal'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import AnalyticsTracker from './AnalyticsTracker'
+
 const App = () => {
   return (
     <div>
       <BrowserRouter>
+        {/* Analytics Tracker */}
+        <AnalyticsTracker />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
