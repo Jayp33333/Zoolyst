@@ -36,11 +36,8 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/50 backdrop-blur-sm">
       <div className="relative bg-white rounded-xl sm:rounded-2xl shadow-2xl max-h-[95vh] w-full max-w-4xl flex flex-col overflow-hidden mx-2 sm:mx-0">
-        {/* Content */}
         <div className="overflow-y-auto flex-1 space-y-4 sm:space-y-6">
-          {/* Header Overlay - Inside Image */}
           <div className="relative w-full aspect-video bg-[#E0E0E0] min-h-[200px]">
-            {/* Loading State */}
             <div
               className={`absolute inset-0 flex items-center justify-center ${
                 imageLoaded ? "hidden" : "block"
@@ -48,8 +45,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
             >
               <div className="animate-pulse bg-gray-300 w-full h-full"></div>
             </div>
-
-            {/* Main Image */}
             <img
               src={images[currentImageIndex]}
               alt={animal.name}
@@ -59,10 +54,8 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
               onLoad={handleImageLoad}
             />
 
-            {/* Overlay Gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20" />
 
-            {/* Close Button - Top Right */}
             <button
               onClick={onClose}
               className="absolute top-2 right-2 sm:top-4 sm:right-4 md:top-6 md:right-6 z-10 bg-white/20 hover:bg-white/90 
@@ -91,7 +84,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
               </svg>
             </button>
 
-            {/* Animal Name - Top Left */}
             <div className="absolute top-3 left-3 sm:top-4 sm:left-4 md:top-6 md:left-6 z-10 max-w-[70%]">
               <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-2xl bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent break-words">
                 {animal.name}
@@ -103,7 +95,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
               )}
             </div>
 
-            {/* Image Navigation */}
             {images.length > 1 && (
               <>
                 <button
@@ -143,7 +134,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
                   </svg>
                 </button>
 
-                {/* Image Indicators */}
                 <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-10 flex space-x-2 sm:space-x-3">
                   {images.map((_, index) => (
                     <button
@@ -163,7 +153,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
               </>
             )}
 
-            {/* Image Counter */}
             {images.length > 1 && (
               <div className="absolute bottom-3 sm:bottom-4 right-3 sm:right-4 z-10 bg-black/40 backdrop-blur-sm rounded-full px-2 py-1 sm:px-3 sm:py-1">
                 <span className="text-white text-xs sm:text-sm font-medium">
@@ -173,11 +162,8 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
             )}
           </div>
 
-          {/* Main Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 px-3 sm:px-4 md:px-6 pb-4 sm:pb-6">
-            {/* Left Column - Basic Info */}
             <div className="lg:col-span-2 space-y-4 sm:space-y-6">
-              {/* Description */}
               <div className="rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border border-[#E0E0E0]">
                 <h4 className="text-lg sm:text-xl font-semibold text-black mb-2 sm:mb-3 flex items-center">
                   <svg
@@ -200,7 +186,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
                 </p>
               </div>
 
-              {/* Fun Facts */}
               {animal.funFacts && animal.funFacts.length > 0 && (
                 <div className="rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border border-[#E0E0E0]">
                   <h4 className="text-lg sm:text-xl font-semibold text-black mb-2 sm:mb-3 flex items-center">
@@ -234,9 +219,7 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
               )}
             </div>
 
-            {/* Right Column - Details */}
             <div className="space-y-4 sm:space-y-6">
-              {/* Habitat */}
               {animal.habitat && (
                 <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border border-[#E0E0E0]">
                   <h4 className="font-semibold text-black mb-2 flex items-center text-sm sm:text-base">
@@ -259,7 +242,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
                 </div>
               )}
 
-              {/* Diet */}
               {animal.diet && (
                 <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border border-[#E0E0E0]">
                   <h4 className="font-semibold text-black mb-2 flex items-center text-sm sm:text-base">
@@ -282,7 +264,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
                 </div>
               )}
 
-              {/* Lifespan */}
               {animal.lifespan && (
                 <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border border-[#E0E0E0]">
                   <h4 className="font-semibold text-black mb-2 flex items-center text-sm sm:text-base">
@@ -305,7 +286,6 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
                 </div>
               )}
 
-              {/* Video Links */}
               {animal.videoLinks && animal.videoLinks.length > 0 && (
                 <div className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border border-[#E0E0E0]">
                   <h4 className="font-semibold text-black mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
@@ -344,8 +324,7 @@ const AnimalDetailModal = ({ animal, onClose, onEdit }) => {
                   </div>
                 </div>
               )}
-
-              {/* History Link */}
+              
               {animal.historyLink && (
                 <div className="border border-[#E0E0E0] rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5">
                   <h4 className="font-semibold text-black mb-2 text-sm sm:text-base">Learn More</h4>

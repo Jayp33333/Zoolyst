@@ -22,7 +22,6 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
     { id: "contact", href: "#contact", text: "Contact" },
   ];
 
-  // Detect scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 0);
@@ -39,7 +38,6 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      {/* Background transition */}
       <AnimatePresence>
         <motion.div
           key={scrolled ? "scrolled" : "top"}
@@ -54,7 +52,6 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
       </AnimatePresence>
 
       <div className="relative max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <motion.span
             className={`self-center text-2xl font-semibold whitespace-nowrap transition-colors duration-300 ${
@@ -65,7 +62,6 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
           </motion.span>
         </Link>
 
-        {/* Mobile menu button */}
         <div className="flex md:order-2">
           <button
             onClick={toggleMenu}
@@ -94,7 +90,6 @@ const HomeHeader = ({ activeLink, setActiveLink }) => {
           </button>
         </div>
 
-        {/* Nav links */}
         <div
           className={`${
             isMenuOpen ? "block" : "hidden"

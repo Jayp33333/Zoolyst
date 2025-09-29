@@ -1,4 +1,3 @@
-// src/components/CreateAnimalForm.js
 import React, { useState } from 'react';
 
 const CreateAnimalForm = ({ onSubmit, onCancel }) => {
@@ -24,9 +23,9 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
     if (arrayName) {
       const updatedArray = [...formData[arrayName]];
       if (field) {
-        updatedArray[index][field] = value; // for videoLinks
+        updatedArray[index][field] = value;
       } else {
-        updatedArray[index] = value; // for funFacts or imageUrls
+        updatedArray[index] = value; 
       }
       setFormData(prev => ({ ...prev, [arrayName]: updatedArray }));
     } else {
@@ -57,7 +56,6 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
     <form onSubmit={handleSubmit} className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-xl border border-[#E0E0E0] space-y-4">
       <h2 className="text-2xl font-bold mb-4 text-center text-black">Add New Animal</h2>
 
-      {/* Basic Info */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
@@ -147,7 +145,6 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
         />
       </div>
 
-      {/* Image URLs */}
       <div className="bg-[#FFF8E1] p-4 rounded-lg shadow-sm border border-[#E0E0E0]">
         <label className="block text-sm font-medium text-gray-700 mb-2">Image URLs</label>
         {formData.imageUrls.map((url, idx) => (
@@ -167,7 +164,6 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
         </button>
       </div>
 
-      {/* Fun Facts */}
       <div className="bg-[#FFF8E1] p-4 rounded-lg shadow-sm border border-[#E0E0E0]">
         <label className="block text-sm font-medium text-gray-700 mb-2">Fun Facts</label>
         {formData.funFacts.map((fact, idx) => (
@@ -187,7 +183,6 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
         </button>
       </div>
 
-      {/* Video Links */}
       <div className="bg-[#FFF8E1] p-4 rounded-lg shadow-sm border border-[#E0E0E0]">
         <label className="block text-sm font-medium text-gray-700 mb-2">Video Links</label>
         {formData.videoLinks.map((video, idx) => (
@@ -214,7 +209,6 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
         </button>
       </div>
 
-      {/* History Link */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">History Link</label>
@@ -239,7 +233,6 @@ const CreateAnimalForm = ({ onSubmit, onCancel }) => {
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-[#E0E0E0]">
         <button
           type="button"

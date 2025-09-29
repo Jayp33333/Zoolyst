@@ -10,7 +10,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        {/* Analytics Tracker */}
+      
         <AnalyticsTracker />
 
         <Routes>

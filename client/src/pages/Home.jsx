@@ -16,7 +16,6 @@ import {
 } from "react-icons/fi";
 import { FaFacebook, FaInstagram, FaGithub } from "react-icons/fa";
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -111,7 +110,6 @@ const WideGreenLightCursor = () => {
   );
 };
 
-// Background Video Component
 const BackgroundVideo = () => {
   const videoRef = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -135,7 +133,6 @@ const BackgroundVideo = () => {
     }
   }, [currentVideoIndex]);
 
-  // When a video ends, go to the next or loop back
   const handleVideoEnded = () => {
     setCurrentVideoIndex((prevIndex) =>
       prevIndex === videoSources.length - 1 ? 0 : prevIndex + 1
@@ -144,7 +141,6 @@ const BackgroundVideo = () => {
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden z-0">
-      {/* Fallback image in case video doesn't load */}
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -157,7 +153,7 @@ const BackgroundVideo = () => {
 
       <video
         ref={videoRef}
-        key={currentVideoIndex} // reload on change
+        key={currentVideoIndex} 
         autoPlay
         muted
         playsInline
@@ -174,16 +170,13 @@ const BackgroundVideo = () => {
         Your browser does not support the video tag.
       </video>
 
-      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/40 z-10"></div>
 
-      {/* Subtle gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/20 z-20"></div>
     </div>
   );
 };
 
-// Enhanced sample animal data
 const sampleAnimals = [
   {
     id: 1,
@@ -250,29 +243,23 @@ const AnimalFeatureCard = ({ animal }) => {
       whileHover={{ y: -8, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      {/* Background Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-white via-[#F8FFFE] to-[#F0F8F0] opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
 
-      {/* Content */}
       <div className="relative z-10">
-        {/* Image Section */}
         <div className="relative h-64 overflow-hidden">
           <img
             src={animal.imageUrl}
             alt={animal.name}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-          {/* Type Badge */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <span className="inline-flex items-center px-3 py-1.5 bg-white/95 backdrop-blur-sm text-[#2E7D32] text-sm font-semibold rounded-full border border-[#2E7D32] shadow-lg">
               {animal.type}
             </span>
           </div>
 
-          {/* Scientific Name */}
           <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <span className="text-white/90 text-sm font-light bg-black/30 backdrop-blur-sm px-2 py-1 rounded">
               {animal.scientificName}
@@ -280,9 +267,7 @@ const AnimalFeatureCard = ({ animal }) => {
           </div>
         </div>
 
-        {/* Content Section */}
         <div className="p-6">
-          {/* Header */}
           <div className="mb-4">
             <h3 className="text-2xl font-bold text-gray-800 mb-2 group-hover:text-[#2E7D32] transition-colors duration-300">
               {animal.name}
@@ -292,7 +277,6 @@ const AnimalFeatureCard = ({ animal }) => {
             </p>
           </div>
 
-          {/* Features Grid */}
           <div className="grid grid-cols-2 gap-3 mb-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-[#FFF8E1] rounded-lg flex items-center justify-center">
@@ -343,7 +327,6 @@ const AnimalFeatureCard = ({ animal }) => {
             </div>
           </div>
 
-          {/* Features Tags */}
           <div className="flex flex-wrap gap-2">
             {animal.features.map((feature, index) => (
               <span
@@ -355,7 +338,6 @@ const AnimalFeatureCard = ({ animal }) => {
             ))}
           </div>
 
-          {/* Explore Button */}
           <div className="mt-4 pt-4 border-t border-[#E0E0E0]">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-500">
@@ -429,18 +411,14 @@ const Home = () => {
       <WideGreenLightCursor />
       <HomeHeader activeLink={activeLink} setActiveLink={setActiveLink} />
       <main className="min-h-screen bg-white overflow-hidden">
-        {/* Hero Section with Background Video */}
         <section
           id="home"
           ref={homeRef}
           className="relative min-h-screen flex items-center justify-center overflow-hidden"
         >
-          {/* Background Video */}
           <BackgroundVideo />
 
-          {/* Content Container */}
           <div className="container mx-auto px-6 py-32 md:py-40 text-center relative z-30">
-            {/* Animated decorative elements */}
             <motion.div
               className="absolute top-20 left-10 w-20 h-20 bg-[#FFF8E1] rounded-full filter blur-xl opacity-50"
               animate={{
@@ -467,9 +445,7 @@ const Home = () => {
               }}
             />
 
-            {/* Content */}
             <motion.div variants={containerVariants} className="relative z-40">
-              {/* Tagline */}
               <motion.div
                 variants={itemVariants}
                 className="flex items-center justify-center mb-4"
@@ -480,7 +456,6 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* Main Heading */}
               <motion.h1
                 variants={itemVariants}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight drop-shadow-2xl "
@@ -492,7 +467,6 @@ const Home = () => {
                 </motion.span>
               </motion.h1>
 
-              {/* Subheading */}
               <motion.h3
                 variants={itemVariants}
                 className="text-sm sm:text-md md:text-xl text-white/90 max-w-3xl mx-auto mb-10 drop-shadow-lg"
@@ -502,7 +476,6 @@ const Home = () => {
                 through cutting-edge technology and interactive experiences.
               </motion.h3>
 
-              {/* CTA Buttons */}
               <motion.div
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6 mb-20"
@@ -515,7 +488,6 @@ const Home = () => {
              hover:shadow-2xl transition-all duration-300 group 
              overflow-hidden"
                 >
-                  {/* Glossy highlight */}
                   <span className="absolute inset-0 bg-gradient-to-t from-transparent via-white/10 to-transparent opacity-30" />
 
                   <motion.span
@@ -552,7 +524,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Featured Animals Section */}
         <section
           id="featured"
           className="relative bg-gradient-to-b from-white to-[#F8FFFE] py-20 md:py-32"
@@ -576,7 +547,6 @@ const Home = () => {
               </motion.p>
             </motion.div>
 
-            {/* Big Animal Cards Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
               {sampleAnimals.map((animal, index) => (
                 <motion.div
@@ -592,7 +562,6 @@ const Home = () => {
               ))}
             </div>
 
-            {/* View All Button */}
             <motion.div
               className="mt-12 text-center"
               whileInView={{ opacity: [0, 1] }}
@@ -609,7 +578,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* About Section */}
         <AnimatedSection
           id="about"
           ref={aboutRef}
@@ -630,7 +598,6 @@ const Home = () => {
 
           <div className="container mx-auto px-6 py-20 md:py-32">
             <div className="max-w-6xl mx-auto">
-              {/* Section Title */}
               <motion.div variants={fadeIn} className="text-center mb-16">
                 <motion.h2
                   className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4"
@@ -648,9 +615,7 @@ const Home = () => {
                 />
               </motion.div>
 
-              {/* Content Grid */}
               <div className="grid lg:grid-cols-3 gap-12 items-start">
-                {/* Text Content */}
                 <motion.div
                   variants={containerVariants}
                   className="space-y-6 lg:col-span-2"
@@ -735,7 +700,6 @@ const Home = () => {
                 </motion.div>
               </div>
 
-              {/* Stats or Features */}
               <motion.div
                 variants={containerVariants}
                 className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20"
@@ -766,7 +730,6 @@ const Home = () => {
           </div>
         </AnimatedSection>
 
-        {/* Contact Section */}
         <AnimatedSection
           id="contact"
           ref={contactRef}
@@ -797,7 +760,6 @@ const Home = () => {
               variants={containerVariants}
               className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12"
             >
-              {/* Contact Info */}
               <motion.div
                 variants={slideUp}
                 className="space-y-4 md:space-y-6 flex flex-col justify-center"
@@ -847,7 +809,6 @@ const Home = () => {
                   </motion.div>
                 ))}
 
-                {/* Social Media Icons */}
                 <motion.div
                   className="pt-4 flex justify-center md:justify-start space-x-6"
                   variants={fadeIn}
@@ -882,7 +843,6 @@ const Home = () => {
                 </motion.div>
               </motion.div>
 
-              {/* Contact Form */}
               <motion.div
                 variants={scaleUp}
                 className="bg-white p-4 sm:p-6 rounded-xl shadow-md border border-[#E0E0E0]"

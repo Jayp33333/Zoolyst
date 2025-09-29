@@ -36,15 +36,12 @@ const GalleryHeader = ({
     searchInputRef.current?.focus();
   };
 
-  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Close filter dropdown
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setShowFilterDropdown(false);
       }
 
-      // Close mobile search
       if (
         showMobileSearch &&
         mobileSearchRef.current &&
@@ -73,7 +70,6 @@ const GalleryHeader = ({
         </Link>
 
         <div className="flex items-center md:order-2 space-x-2">
-          {/* Mobile Search Button */}
           <button
             type="button"
             className="md:hidden text-gray-600 hover:bg-[#E0E0E0] rounded-lg text-sm p-2.5 transition-colors"
@@ -97,7 +93,6 @@ const GalleryHeader = ({
             <span className="sr-only">Search</span>
           </button>
 
-          {/* Mobile Search Input */}
           {showMobileSearch && (
             <div
               className="absolute top-16 left-0 right-0 px-4 md:hidden"
@@ -158,7 +153,6 @@ const GalleryHeader = ({
             </div>
           )}
 
-          {/* Desktop Search Input */}
           <div className="relative hidden md:block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
@@ -210,7 +204,6 @@ const GalleryHeader = ({
             )}
           </div>
 
-          {/* Filter Button */}
           <div className="relative" ref={dropdownRef}>
             <button
               type="button"
@@ -241,7 +234,6 @@ const GalleryHeader = ({
               <span className="sr-only">Filter</span>
             </button>
 
-            {/* Filter Dropdown */}
             {showFilterDropdown && (
               <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg border border-[#E0E0E0]">
                 <div className="py-1">

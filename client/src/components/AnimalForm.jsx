@@ -46,15 +46,13 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.type) newErrors.type = 'Type is required';
     if (!formData.description.trim()) newErrors.description = 'Description is required';
-    
-    // Validate image URLs
+
     formData.imageUrls.forEach((url, index) => {
       if (url && !isValidUrl(url)) {
         newErrors[`imageUrl-${index}`] = 'Please enter a valid URL';
       }
     });
     
-    // Validate video URLs
     formData.videoLinks.forEach((video, index) => {
       if (video.url && !isValidUrl(video.url)) {
         newErrors[`videoUrl-${index}`] = 'Please enter a valid URL';
@@ -82,7 +80,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -99,7 +96,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
       return { ...prev, [field]: updated };
     });
     
-    // Clear error when user starts typing
     const errorKey = subField ? `${field}-${subField}-${index}` : `${field}-${index}`;
     if (errors[errorKey]) {
       setErrors(prev => ({ ...prev, [errorKey]: '' }));
@@ -132,7 +128,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
     e.preventDefault();
     
     if (!validateForm()) {
-      // Scroll to first error
       const firstError = Object.keys(errors)[0];
       const element = document.querySelector(`[name="${firstError}"]`);
       if (element) element.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -142,7 +137,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
     setIsSubmitting(true);
     
     try {
-      // Clean up empty fields before submitting
       const cleanedData = {
         ...formData,
         imageUrls: formData.imageUrls.filter(url => url.trim() !== ''),
@@ -184,7 +178,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="p-6 space-y-8">
-          {/* Basic Information Section */}
           <div className="bg-gray-50 p-6 rounded-xl">
             <SectionHeader 
               icon={<svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -256,7 +249,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
             </div>
           </div>
 
-          {/* Description Section */}
           <div className="bg-gray-50 p-6 rounded-xl">
             <SectionHeader 
               icon={<svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -283,7 +275,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
             </div>
           </div>
 
-          {/* Habitat & Diet Section */}
           <div className="bg-gray-50 p-6 rounded-xl">
             <SectionHeader 
               icon={<svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,7 +310,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
             </div>
           </div>
 
-          {/* Media Section */}
           <div className="bg-gray-50 p-6 rounded-xl">
             <SectionHeader 
               icon={<svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -329,7 +319,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
               description="Add images and videos of the animal"
             />
             
-            {/* Image URLs */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-700 mb-3">Image URLs</label>
               {formData.imageUrls.map((url, i) => (
@@ -369,7 +358,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
               </button>
             </div>
 
-            {/* Video Links */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-3">Video Links</label>
               {formData.videoLinks.map((video, i) => (
@@ -425,7 +413,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
             </div>
           </div>
 
-          {/* Additional Information Section */}
           <div className="bg-gray-50 p-6 rounded-xl">
             <SectionHeader 
               icon={<svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -473,7 +460,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
               </button>
             </div>
 
-            {/* History Link */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">History Link</label>
@@ -501,7 +487,6 @@ const AnimalForm = ({ initialValues, onSubmit, onCancel, mode = 'create' }) => {
             </div>
           </div>
 
-          {/* Form Actions */}
           <div className="flex flex-col sm:flex-row justify-between items-center pt-6 border-t border-gray-200">
             <div className="text-sm text-gray-500 mb-4 sm:mb-0">
               Fields marked with <span className="text-red-500">*</span> are required

@@ -9,7 +9,7 @@ export const deleteAnimal = createAsyncThunk('animals/deleteAnimal', animalAPI.d
 const animalSlice = createSlice({
   name: 'animals',
   initialState: {
-    data: { data: [] }, // Matches your API response structure
+    data: { data: [] },
     loading: false,
     error: null,
   },

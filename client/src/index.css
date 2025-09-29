@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
   * {
     scrollbar-width: thin;
@@ -31,10 +30,10 @@
     color: var(--text-color);
     scroll-behavior: smooth;
   }
-  a, p{
+  a,
+  p {
     font-family: Arial, sans-serif;
   }
-  
 }
 
 @layer components {
@@ -83,20 +82,17 @@
   .delay-200 {
     animation-delay: 200ms;
   }
-  /* Add this to your global CSS file or style component */
   .transition-all {
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
   }
 
-  /* Ensure the effect appears above content */
   .fixed {
     position: fixed;
     z-index: 9999;
   }
 
-  /* Optional: dim effect on dark backgrounds */
   .dark .mix-blend-screen {
     opacity: 0.5;
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 
 const GallerySkeleton = () => {
-  // Number of skeleton cards to show (match your grid size)
   const skeletonItems = Array(10).fill(0);
 
   return (

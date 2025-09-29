@@ -20,7 +20,6 @@ const Gallery = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState('');
 
-  // Debounce search input
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearchQuery(searchQuery);
@@ -35,7 +34,6 @@ const Gallery = () => {
     dispatch(fetchAnimals());
   }, [dispatch]);
 
-  // Filter animals based on search query and selected categories
   const filteredAnimals = animalsData?.data?.filter(animal => {
     const categoryMatch = selectedCategories.length === 0 || 
                          selectedCategories.includes(animal.type);
@@ -132,7 +130,6 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Edit Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <AnimalForm 
           initialValues={currentAnimal} 
@@ -141,7 +138,6 @@ const Gallery = () => {
         />
       </Modal>
 
-      {/* Detail View Modal */}
       <DetailModal isOpen={isDetailModalOpen} onClose={() => setIsDetailModalOpen(false)}>
         <AnimalDetailModal 
           animal={selectedAnimal}
